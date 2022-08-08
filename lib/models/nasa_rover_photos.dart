@@ -7,7 +7,7 @@ class NasaRoverPhotos {
 
   NasaRoverPhotos({required this.photos});
   factory NasaRoverPhotos.fromJson(String str) => NasaRoverPhotos(
-        photos: List<NasaRoverPhotoEntry>.of(
+        photos: List<NasaRoverPhotoEntry>.from(
           jsonDecode(str)['photos'].map(
             (z) => NasaRoverPhotoEntry.fromMap(z),
           ),

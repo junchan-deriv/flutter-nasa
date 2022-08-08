@@ -15,7 +15,7 @@ Uri _constructEndpointUri(
   return Uri(
       scheme: "https",
       host: "api.nasa.gov",
-      pathSegments: ["/mars-photos/api/v1", path],
+      path: "/mars-photos/api/v1$path",
       queryParameters: params);
 }
 
@@ -27,14 +27,13 @@ class NasaService {
   ///`sol` - the time in SOL unit<br/>
   ///`camera` - the camera where the image should be obtained<br/>
   ///
-  static Future<NasaRoverPhotos> getRoverPhotos(
-      String rover, int sol, RoverCamera? camera) async {
-    http.Response response = await http.get(
-      _constructEndpointUri(
-        path: "/rovers/$rover/photos",
-        queryParams: {"sol": sol, "camera": camera},
-      ),
+  static Future<NasaRoverPhotos> getRoverPhotos(String rover, int sol,
+      [RoverCamera? camera]) async {
+    var url = _constructEndpointUri(
+      path: "/rovers/$rover/photos",
+      queryParams: {"sol": sol.toString(), "camera": camera},
     );
+    http.Response response = await http.get(url);
     if (response.statusCode != 200) {
       throw Exception("Request failed");
     }
@@ -42,11 +41,10 @@ class NasaService {
   }
 
   static Future<NasaRoverManifest> getRoverManifest(String rover) async {
-    http.Response response = await http.get(
-      _constructEndpointUri(
-        path: "/manifests/$rover",
-      ),
+    var url = _constructEndpointUri(
+      path: "/manifests/$rover",
     );
+    http.Response response = await http.get(url);
     if (response.statusCode != 200) {
       throw Exception("Request failed");
     }

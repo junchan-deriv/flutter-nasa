@@ -20,7 +20,9 @@ enum RoverCamera {
   // ignore: constant_identifier_names
   PANCAM,
   // ignore: constant_identifier_names
-  MINITES
+  MINITES,
+  // ignore: constant_identifier_names
+  ENTRY
 }
 
 ///
