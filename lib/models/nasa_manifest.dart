@@ -26,7 +26,7 @@ enum RoverCamera {
 ///
 /// The manifest returned from /:name/manifest
 ///
-class Manifest {
+class NasaRoverManifest {
   final String name;
   final DateTime landingDate;
   final DateTime launchDate;
@@ -35,7 +35,7 @@ class Manifest {
   final DateTime maxDate;
   final int totalPhotos;
   final List<ManifestPhotoEntry> photos;
-  Manifest(
+  NasaRoverManifest(
       {required this.name,
       required this.landingDate,
       required this.launchDate,
@@ -44,7 +44,8 @@ class Manifest {
       required this.maxDate,
       required this.maxSol,
       required this.totalPhotos});
-  factory Manifest.fromMap(Map<String, dynamic> json) => Manifest(
+  factory NasaRoverManifest.fromMap(Map<String, dynamic> json) =>
+      NasaRoverManifest(
         name: json["name"],
         landingDate: DateTime.parse(json["landing_date"]),
         launchDate: DateTime.parse(json["launch_date"]),
@@ -56,8 +57,8 @@ class Manifest {
           json["photos"].map((x) => ManifestPhotoEntry.fromMap(x)),
         ),
       );
-  factory Manifest.fromJson(String json) =>
-      Manifest.fromMap(jsonDecode(json)["photo_manifest"]);
+  factory NasaRoverManifest.fromJson(String json) =>
+      NasaRoverManifest.fromMap(jsonDecode(json)["photo_manifest"]);
 }
 
 ///
