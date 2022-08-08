@@ -50,6 +50,13 @@ class DetailsPage extends StatelessWidget {
                 ],
               )),
           //todo add more info here
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                textStyle: TextStyle(fontSize: 20),
+              ),
+              child: Text('Learn More'),
+              onPressed: () {})
         ],
       ),
     );
