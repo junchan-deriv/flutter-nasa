@@ -89,4 +89,9 @@ abstract class LoaderCubitBase<T> extends Cubit<LoaderState<T>> {
   /// is loader does nothing for now
   ///
   bool get isEmpty => state is LoaderInitialized;
+
+  ///
+  /// is the loader loaded
+  ///
+  bool get isLoaded => state is Loaded<T>;
 }
