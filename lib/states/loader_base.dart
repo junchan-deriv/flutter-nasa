@@ -5,7 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 ///Base class for loader
 ///
 
-abstract class LoaderState<T> {}
+abstract class LoaderState<T> {
+  final String tag;
+  LoaderState({this.tag = ""});
+}
 
 ///
 /// The loader is initialized but do not load anything
@@ -15,7 +18,9 @@ class LoaderInitialized<T> extends LoaderState<T> {}
 ///
 /// The loader is loading something
 ///
-class Loading<T> extends LoaderState<T> {}
+class Loading<T> extends LoaderState<T> {
+  Loading({super.tag = ""});
+}
 
 ///
 /// The loader is loaded something
@@ -25,8 +30,7 @@ class Loaded<T> extends LoaderState<T> {
   /// Loaded data
   ///
   final T loaded;
-  final String tag;
-  Loaded({required this.loaded, this.tag = ""});
+  Loaded({required this.loaded, super.tag = ""});
 }
 
 ///
@@ -34,7 +38,7 @@ class Loaded<T> extends LoaderState<T> {
 ///
 class LoaderError<T> extends LoaderState<T> {
   final Error error;
-  LoaderError(this.error);
+  LoaderError({required this.error, super.tag = ""});
 }
 
 ///
@@ -44,11 +48,11 @@ abstract class LoaderCubitBase<T> extends Cubit<LoaderState<T>> {
   LoaderCubitBase() : super(LoaderInitialized<T>());
   @protected
   void loadStuffsInternal(Future<T> f, String tag) {
-    emit(Loading<T>());
+    emit(Loading<T>(tag: tag));
     f.then((data) {
       emit(Loaded(loaded: data, tag: tag));
     }, onError: (error) {
-      emit(LoaderError(error));
+      emit(LoaderError(error: error, tag: tag));
     });
   }
 
