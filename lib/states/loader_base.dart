@@ -51,4 +51,38 @@ abstract class LoaderCubitBase<T> extends Cubit<LoaderState<T>> {
       emit(LoaderError(error));
     });
   }
+
+  ///
+  /// can the loader reset
+  ///
+  bool get canReset => state is! Loading<T>;
+
+  ///
+  /// reset the loader
+  ///
+  void reset() {
+    if (!canReset) {
+      throw Exception("The loader is not resetable");
+    }
+    emit(LoaderInitialized());
+  }
+
+  ///
+  /// some utilities to get the stuffs
+  ///
+
+  ///
+  /// is the loader is loading the stuffs
+  ///
+  bool get isLoading => state is Loading<T>;
+
+  ///
+  /// is loader failed
+  ///
+  bool get isFailed => state is LoaderError;
+
+  ///
+  /// is loader does nothing for now
+  ///
+  bool get isEmpty => state is LoaderInitialized;
 }
