@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nasa/models/nasa_rover_photos.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class DetailsPage extends StatelessWidget {
   final NasaRoverPhotoEntry nasa;
@@ -15,13 +16,8 @@ class DetailsPage extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          Container(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          ),
           Hero(
-            tag: nasa.earthDate,
+            tag: nasa.id,
             child: FadeInImage.memoryNetwork(
               placeholder: kTransparentImage,
               image: nasa.image.toString(),
@@ -29,19 +25,19 @@ class DetailsPage extends StatelessWidget {
             ),
           ),
           Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: <Widget>[
                   Text(
                     nasa.earthDate.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 12.0,
                         fontWeight: FontWeight.normal,
                         fontStyle: FontStyle.italic),
                   ),
                   Container(
                     width: 200,
-                    child: Text(
+                    child: const Text(
                       "(C) Nasa",
                       softWrap: true,
                       textAlign: TextAlign.end,
@@ -53,13 +49,7 @@ class DetailsPage extends StatelessWidget {
                   ),
                 ],
               )),
-          Padding(
-            padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
-            child: Text(
-              nasa.sol,
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-            ),
-          )
+          //todo add more info here
         ],
       ),
     );
