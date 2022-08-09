@@ -10,6 +10,12 @@ class RoverPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const List<String> rovers = <String>[
+      'Curiosity',
+      'Spirit',
+      'Opportunity',
+    ];
+
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 58, 57, 57),
         appBar: AppBar(
@@ -44,35 +50,54 @@ class RoverPage extends StatelessWidget {
           ),
         ),
         body: Center(
-          child: ListView(children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (ctx) => const DetailsPage(rover: "spirit")));
-              },
-              child: Container(
-                child: new Image.asset(
-                  'images/curiosity.jpg',
-                  height: 250,
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                child: new Image.asset('images/spirit.jpg',
-                    height: 250, fit: BoxFit.fill),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                child: new Image.asset('images/opportunity.jpg',
-                    height: 250, fit: BoxFit.fill),
-              ),
-            ),
-          ]),
-        ));
+            child: ListView.builder(
+                itemCount: rovers.length,
+                itemBuilder: ((context, index) {
+                  final String rover = rovers[index].toLowerCase();
+                  return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return DetailsPage(rover: rover);
+                        }));
+                      },
+                      child: Container(
+                        child: Image.asset(
+                          'images/$rover.jpg',
+                          height: 250,
+                          fit: BoxFit.fill,
+                        ),
+                      ));
+                }))
+            // child: ListView(children: <Widget>[
+            //   GestureDetector(
+            //     onTap: () {
+            //       Navigator.of(context).push(MaterialPageRoute(
+            //           builder: (ctx) => const DetailsPage(rover: "spirit")));
+            //     },
+            //     child: Container(
+            //       child: new Image.asset(
+            //         'images/curiosity.jpg',
+            //         height: 250,
+            //         fit: BoxFit.fill,
+            //       ),
+            //     ),
+            //   ),
+            //   GestureDetector(
+            //     onTap: () {},
+            //     child: Container(
+            //       child: new Image.asset('images/spirit.jpg',
+            //           height: 250, fit: BoxFit.fill),
+            //     ),
+            //   ),
+            //   GestureDetector(
+            //     onTap: () {},
+            //     child: Container(
+            //       child: new Image.asset('images/opportunity.jpg',
+            //           height: 250, fit: BoxFit.fill),
+            //     ),
+            //   ),
+            // ]),
+            ));
   }
 }
