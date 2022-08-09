@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 ///
 
 abstract class LoaderState<T> {
-  final String tag;
+  final dynamic tag;
   LoaderState({this.tag = ""});
 }
 
@@ -47,7 +47,7 @@ class LoaderError<T> extends LoaderState<T> {
 abstract class LoaderCubitBase<T> extends Cubit<LoaderState<T>> {
   LoaderCubitBase() : super(LoaderInitialized<T>());
   @protected
-  void loadStuffsInternal(Future<T> f, String tag) {
+  void loadStuffsInternal(Future<T> f, dynamic tag) {
     emit(Loading<T>(tag: tag));
     f.then((data) {
       emit(Loaded(loaded: data, tag: tag));

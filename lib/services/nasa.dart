@@ -28,10 +28,14 @@ class NasaService {
   ///`camera` - the camera where the image should be obtained<br/>
   ///
   static Future<NasaRoverPhotos> getRoverPhotos(String rover, int sol,
-      [RoverCamera? camera]) async {
+      [RoverCamera? camera, int page = 1]) async {
     var url = _constructEndpointUri(
       path: "/rovers/$rover/photos",
-      queryParams: {"sol": sol.toString(), "camera": camera},
+      queryParams: {
+        "sol": sol.toString(),
+        "camera": camera,
+        "page": page.toString()
+      },
     );
     http.Response response = await http.get(url);
     if (response.statusCode != 200) {
