@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_nasa/pages/detail.dart';
 
 class RoverPage extends StatelessWidget {
   const RoverPage({Key? key}) : super(key: key);
@@ -45,7 +46,10 @@ class RoverPage extends StatelessWidget {
         body: Center(
           child: ListView(children: <Widget>[
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => const DetailsPage(rover: "spirit")));
+              },
               child: Container(
                 child: new Image.asset(
                   'images/curiosity.jpg',
