@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_nasa/pages/detail.dart';
 
 class RoverPage extends StatelessWidget {
   const RoverPage({Key? key}) : super(key: key);
@@ -23,10 +24,16 @@ class RoverPage extends StatelessWidget {
         ),
         body: Center(
           child: Column(children: [
-            Container(
-              height: 90.0,
-              width: 300.0,
-              color: Colors.red,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => const DetailsPage(rover: "spirit")));
+              },
+              child: Container(
+                height: 90.0,
+                width: 300.0,
+                color: Colors.red,
+              ),
             ),
             Container(
               height: 90.0,
