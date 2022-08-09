@@ -10,33 +10,63 @@ class RoverPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 58, 57, 57),
         appBar: AppBar(
-          title: Center(
-            child: const Text(
-              "Mars Rover",
-              style: TextStyle(
-                  fontFamily: 'ChakraPetch',
-                  fontSize: 40,
-                  fontWeight: FontWeight.w500),
+          elevation: 15,
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20), //200 ,200
+                  bottomRight: Radius.circular(300))),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(200),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "The Mars Rovers",
+                      style: TextStyle(
+                          fontFamily: 'ChakraPetch',
+                          fontSize: 50,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 59)
+              ],
             ),
           ),
         ),
         body: Center(
-          child: Column(children: [
-            Container(
-              height: 90.0,
-              width: 300.0,
-              color: Colors.red,
+          child: ListView(children: <Widget>[
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                child: new Image.asset(
+                  'images/curiosity.jpg',
+                  height: 250,
+                  fit: BoxFit.fill,
+                ),
+              ),
             ),
-            Container(
-              height: 90.0,
-              width: 300.0,
-              color: Color.fromARGB(255, 145, 84, 80),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                child: new Image.asset('images/spirit.jpg',
+                    height: 250, fit: BoxFit.fill),
+              ),
             ),
-            Container(
-              height: 90.0,
-              width: 300.0,
-              color: Colors.red,
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                child: new Image.asset('images/opportunity.jpg',
+                    height: 250, fit: BoxFit.fill),
+              ),
             ),
           ]),
         ));
