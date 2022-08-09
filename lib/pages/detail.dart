@@ -1,62 +1,154 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nasa/models/nasa_rover_photos.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_nasa/models/nasa_manifest.dart';
+import 'package:flutter_nasa/states/loader_base.dart';
+import 'package:flutter_nasa/states/nasa_manifest.dart';
+
+const Color _primaryTextColor = Colors.grey;
+const Color _contentTextColor = Colors.black;
 
 class DetailsPage extends StatelessWidget {
-  final NasaRoverPhotoEntry nasa;
+  final String rover;
 
-  const DetailsPage({Key? key, required this.nasa}) : super(key: key);
+  const DetailsPage({Key? key, required this.rover}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    NasaManifestLoaderCubit cubit = NasaManifestLoaderCubit();
+    cubit.fetchNasaRoverManifest(rover);
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            rover,
+          ),
+        ),
+        body: BlocBuilder<NasaManifestLoaderCubit,
+                LoaderState<NasaRoverManifest>>(
+            bloc: cubit,
+            builder: (ctx, state) {
+              if (cubit.isFailed) {
+                return const Center(
+                  child: Text("An error was occured"),
+                );
+              } else if (cubit.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (cubit.isLoaded) {
+                return _RoverDetail(
+                  roverInfo: (state as Loaded<NasaRoverManifest>).loaded,
+                );
+              } else {
+                assert(false); //should never happen
+                return Container();
+              }
+            }),
+      ),
+    );
+  }
+}
+
+class _RoverDetail extends StatelessWidget {
+  const _RoverDetail({
+    Key? key,
+    required this.roverInfo,
+  }) : super(key: key);
+
+  final NasaRoverManifest roverInfo;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(nasa.camera.fullName),
-        backgroundColor: Colors.black,
-      ),
-      body: ListView(
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Hero(
-            tag: nasa.id,
-            child: FadeInImage.memoryNetwork(
-              placeholder: kTransparentImage,
-              image: nasa.image.toString(),
-              fit: BoxFit.contain,
+          SizedBox(
+            height: 300,
+            child: Hero(
+                tag: roverInfo.name,
+                child: AspectRatio(
+                    aspectRatio: 16.0 / 9,
+                    child: Image.asset(
+                        "images/${roverInfo.name.toLowerCase()}.jpg"))),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  roverInfo.name,
+                  style: TextStyle(
+                    fontFamily: 'Avenir',
+                    fontSize: 56,
+                    color: _primaryTextColor,
+                    fontWeight: FontWeight.w900,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                Text(
+                  'Solar System',
+                  style: TextStyle(
+                    fontFamily: 'Avenir',
+                    fontSize: 31,
+                    color: _primaryTextColor,
+                    fontWeight: FontWeight.w300,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                Divider(color: Colors.black38),
+                SizedBox(height: 32),
+                Text(
+                  roverInfo.landingDate.toString(),
+                  maxLines: 5,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontFamily: 'Avenir',
+                    fontSize: 20,
+                    color: _contentTextColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 32),
+                Divider(color: Colors.black38),
+              ],
             ),
           ),
           Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    nasa.earthDate.toString(),
-                    style: const TextStyle(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.normal,
-                        fontStyle: FontStyle.italic),
-                  ),
-                  Container(
-                    width: 200,
-                    child: const Text(
-                      "(C) Nasa",
-                      softWrap: true,
-                      textAlign: TextAlign.end,
-                      style: TextStyle(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.normal,
-                          fontStyle: FontStyle.italic),
-                    ),
-                  ),
-                ],
-              )),
-          //todo add more info here
-          ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                textStyle: TextStyle(fontSize: 20),
+            padding: const EdgeInsets.only(left: 32.0),
+            child: Text(
+              'Gallery',
+              style: TextStyle(
+                fontFamily: 'Avenir',
+                fontSize: 25,
+                color: const Color(0xff47455f),
+                fontWeight: FontWeight.w300,
               ),
-              child: Text('Learn More'),
-              onPressed: () {})
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Container(
+            height: 250,
+            child: ListView.builder(
+                itemCount: roverInfo.totalPhotos,
+                scrollDirection: Axis.horizontal, // make list scroll horizontal
+                itemBuilder: (context, index) {
+                  return Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Image.network(
+                          "https://http.cat/101",
+                          fit: BoxFit.cover,
+                        )),
+                  );
+                }),
+          ),
         ],
       ),
     );
