@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:math' as Math;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_nasa/models/nasa_manifest.dart';
-import 'package:flutter_nasa/models/nasa_rover_photos.dart';
+import 'package:flutter_nasa/pages/textfield.dart';
 import 'package:flutter_nasa/states/loader_base.dart';
 import 'package:flutter_nasa/states/nasa_manifest.dart';
-import 'package:flutter_nasa/states/nasa_photo.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:lottie/lottie.dart';
 
 const Color _primaryTextColor = Colors.grey;
 const Color _contentTextColor = Colors.black;
@@ -21,9 +22,7 @@ class DetailsPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            rover,
-          ),
+          title: Text("${rover[0].toUpperCase()}${rover.substring(1)}"),
         ),
         body: BlocBuilder<NasaManifestLoaderCubit,
                 LoaderState<NasaRoverManifest>>(
@@ -34,8 +33,10 @@ class DetailsPage extends StatelessWidget {
                   child: Text("An error was occured"),
                 );
               } else if (cubit.isLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
+                return Center(
+                  child: Lottie.network(
+                    'https://assets1.lottiefiles.com/packages/lf20_j8t8fjxs.json',
+                  ),
                 );
               } else if (cubit.isLoaded) {
                 return _RoverDetail(
@@ -176,6 +177,27 @@ class _RoverDetail extends StatelessWidget {
                           });
                     }),
           ),
+          ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(
+                  // MaterialPageRoute(
+
+                  //   builder: (_) => TextFieldExample(
+                  //     rover: roverInfo.name.toLowerCase(),
+
+                  //   ),
+                  //),
+                  PageTransition(
+                    child:
+                        TextFieldExample(rover: roverInfo.name.toLowerCase()),
+                    type: PageTransitionType.rightToLeft,
+                    childCurrent: this,
+                    duration: const Duration(milliseconds: 200),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.newspaper),
+              label: const Text("Learn more"))
         ],
       ),
     );
