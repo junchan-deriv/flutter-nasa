@@ -37,7 +37,7 @@ class Loaded<T> extends LoaderState<T> {
 /// Loader failed
 ///
 class LoaderError<T> extends LoaderState<T> {
-  final Error error;
+  final Object error;
   LoaderError({required this.error, super.tag = ""});
 }
 
