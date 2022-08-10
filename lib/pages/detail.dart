@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as Math;
+import 'dart:math' as math;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_nasa/models/nasa_manifest.dart';
+import 'package:flutter_nasa/models/nasa_rover_photos.dart';
 import 'package:flutter_nasa/pages/textfield.dart';
 import 'package:flutter_nasa/states/loader_base.dart';
 import 'package:flutter_nasa/states/nasa_manifest.dart';
+import 'package:flutter_nasa/states/nasa_photo.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:lottie/lottie.dart';
 
@@ -154,10 +156,10 @@ class _RoverDetail extends StatelessWidget {
                           (state as Loaded<NasaRoverPhotos>).loaded;
                       int baseIndex = result.photos.length <= 5
                           ? 0
-                          : Math.Random().nextInt(result.photos.length - 5);
+                          : math.Random().nextInt(result.photos.length - 5);
                       result.photos.shuffle();
                       return ListView.builder(
-                          itemCount: Math.min(5, result.photos.length),
+                          itemCount: math.min(5, result.photos.length),
                           scrollDirection:
                               Axis.horizontal, // make list scroll horizontal
                           itemBuilder: (context, index) {
