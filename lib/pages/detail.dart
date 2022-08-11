@@ -194,11 +194,11 @@ class _RoverDetail extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 32.0),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 32.0),
                       child: Text(
-                        'Gallery',
-                        style: TextStyle(
+                        AppLocalizations.of(context)!.gallery,
+                        style: const TextStyle(
                           fontFamily: 'ChakraPetch-Light',
                           fontSize: 28,
                           color: Color.fromARGB(255, 255, 255, 255),

@@ -9,5 +9,6 @@
   "camera": "Camera :",
   "search": "Search",
   "noData": "There is no data for the selected criteria",
-  "validRange": "Value must be between @ and @"
+  "validRange": "Value must be between @ and @",
+  "gallery": "Gallery"
 }
