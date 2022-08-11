@@ -33,7 +33,7 @@ class NasaService {
       path: "/rovers/$rover/photos",
       queryParams: {
         "sol": sol.toString(),
-        "camera": camera,
+        "camera": camera?.name,
         "page": page.toString()
       },
     );
