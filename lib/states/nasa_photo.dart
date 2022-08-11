@@ -50,13 +50,15 @@ class NasaPhotoLoaderCubit extends LoaderCubitBase<NasaRoverPhotos> {
     if (!isLoaded || state.tag is! _NasaPhotoLoaderTag) {
       throw Exception("Cannot perform the fetch, the tag is missing");
     }
+    print("fetchNextPage");
     _NasaPhotoLoaderTag tag = state.tag;
     //put into transitive loading state instead of loading state
     //to allow the UI still having rendering while it is loading
     //in background
+    NasaRoverPhotos old = (state as Loaded<NasaRoverPhotos>).loaded;
     emit(
       NasaPhotoTransitiveLoading(
-        cached: (state as Loaded<NasaRoverPhotos>).loaded,
+        cached: old,
         tag: tag,
       ),
     );
@@ -68,7 +70,7 @@ class NasaPhotoLoaderCubit extends LoaderCubitBase<NasaRoverPhotos> {
       //with both of the requests merge it
       NasaRoverPhotos merged = NasaRoverPhotos(
           photos: [
-        (state as Loaded<NasaRoverPhotos>).loaded.photos,
+        old.photos,
         nextBatch.photos
         //expand(x) performs mapping for x=>x' where x' is zero or more
         //elements which will added into the list
@@ -90,5 +92,44 @@ class NasaPhotoLoaderCubit extends LoaderCubitBase<NasaRoverPhotos> {
     } on Error catch (e) {
       emit(LoaderError(error: e, tag: tag));
     }
+  }
+
+  ///
+  /// Get the current page
+  ///
+  int get currentPage {
+    if ((state is! Loaded<NasaRoverPhotos> &&
+            state is! NasaPhotoTransitiveLoading) ||
+        state.tag is! _NasaPhotoLoaderTag) {
+      throw Exception(
+          "The currentPage getter must not be called when the data is not loaded");
+    }
+    return (state.tag as _NasaPhotoLoaderTag).page;
+  }
+
+  ///
+  /// Query the cubic weather the next page is available
+  ///
+  bool get haveNextPage {
+    //since one page have 25 entries
+    //we can estimate the current page number
+    if ((state is! Loaded<NasaRoverPhotos> &&
+            state is! NasaPhotoTransitiveLoading) ||
+        state.tag is! _NasaPhotoLoaderTag) {
+      return false;
+    }
+    late NasaRoverPhotos data;
+    if (state is NasaPhotoTransitiveLoading) {
+      data = (state as NasaPhotoTransitiveLoading).cached;
+    } else {
+      data = (state as Loaded<NasaRoverPhotos>).loaded;
+    }
+    //if the number cannot be prefectly divided assume we have loaded all
+    if (data.photos.isEmpty || data.photos.length % 25 != 0) {
+      return false;
+    }
+    // if perfectly divisible compare the page number
+    int estimatedCurrentPageNumber = data.photos.length ~/ 25;
+    return estimatedCurrentPageNumber == currentPage;
   }
 }

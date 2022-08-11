@@ -190,8 +190,7 @@ class _RoverDetail extends StatelessWidget {
                   //   ),
                   //),
                   PageTransition(
-                    child:
-                        TextFieldExample(rover: roverInfo.name.toLowerCase()),
+                    child: TextFieldExample(rover: rover, manifest: roverInfo),
                     type: PageTransitionType.rightToLeft,
                     childCurrent: this,
                     duration: const Duration(milliseconds: 200),
