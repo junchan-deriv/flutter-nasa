@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nasa/pages/detail.dart';
-import 'package:flutter_nasa/widgets/blurred_image.dart';
+import 'package:flutter_nasa/widgets/bordered_image.dart';
 
 class RoverPage extends StatelessWidget {
   const RoverPage({Key? key}) : super(key: key);
@@ -64,7 +64,7 @@ class RoverPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20).copyWith(
                               bottomRight: Radius.zero,
                               bottomLeft: Radius.zero),
-                          child: BlurredImage(
+                          child: BorderedImage(
                             image: Image.asset(
                               'images/$rover.jpg',
                               height: 260,
