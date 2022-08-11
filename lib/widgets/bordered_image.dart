@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class BlurredImage extends StatelessWidget {
+class BorderedImage extends StatelessWidget {
   final Image image;
-  const BlurredImage({Key? key, required this.image}) : super(key: key);
+  const BorderedImage({Key? key, required this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
