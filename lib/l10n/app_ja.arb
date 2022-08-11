@@ -2,5 +2,12 @@
   "errorMessage": "エラーが発生しました",
   "launchingDate": "発射日付",
   "landingDate": "着地日付",
-  "status": "状態"
+  "status": "状態",
+  "learnMore": "もっと知る",
+  "discoverMore": "もっと知る",
+  "all": "すべて",
+  "camera": "カメラ　：",
+  "search": "検索",
+  "noData": "検索条件に回答するデータはありません",
+  "validRange": "値は@から@までである必要があります"
 }
