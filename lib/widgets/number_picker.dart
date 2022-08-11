@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 ///
 /// Widget for the number picker withthe -/+ control
@@ -129,7 +130,10 @@ class _NumberPickerWidgetState extends State<NumberPickerWidget> {
             //show the error text when it is invalid
             errorText: valid
                 ? null
-                : "The value must be between ${widget.minValue} and ${widget.maxValue}",
+                : AppLocalizations.of(context)!
+                    .validRange
+                    .replaceFirst("@", widget.minValue.toString())
+                    .replaceFirst("@", widget.maxValue.toString()),
           ),
         ),
       ),

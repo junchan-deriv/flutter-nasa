@@ -6,6 +6,7 @@ import 'package:flutter_nasa/states/loader_base.dart';
 import 'package:flutter_nasa/states/nasa_photo.dart';
 import 'package:flutter_nasa/widgets/network_image.dart';
 import 'package:flutter_nasa/widgets/number_picker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TextFieldExample extends StatefulWidget {
   final String rover;
@@ -47,19 +48,19 @@ class _State extends State<TextFieldExample> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text(
-          'Discover More',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.discoverMore,
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 25,
             fontFamily: 'ChakraPetch',
           ),
         ),
         // foregroundColor: Colors.pink,
-        backgroundColor: Color.fromARGB(255, 36, 24, 24),
+        backgroundColor: const Color.fromARGB(255, 36, 24, 24),
         elevation: 22,
-        shadowColor: Color.fromARGB(255, 49, 49, 49),
-        shape: RoundedRectangleBorder(
+        shadowColor: const Color.fromARGB(255, 49, 49, 49),
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(bottomRight: Radius.circular(40))),
       ),
       body: DecoratedBox(
@@ -79,8 +80,8 @@ class _State extends State<TextFieldExample> {
               }
               print((state as LoaderError).error.toString());
               //pop up error message
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text("Error occured"),
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(AppLocalizations.of(context)!.errorMessage),
               ));
             },
             builder: (context, state) {
@@ -99,17 +100,18 @@ class _State extends State<TextFieldExample> {
                     child: Column(mainAxisSize: MainAxisSize.min, children: [
                       Container(
                         decoration: BoxDecoration(
-                          color:
-                              Color.fromARGB(255, 62, 63, 100).withAlpha(180),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: const Color.fromARGB(255, 62, 63, 100)
+                              .withAlpha(180),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
                           boxShadow: [
                             BoxShadow(
-                              color: Color.fromARGB(255, 51, 46, 46)
+                              color: const Color.fromARGB(255, 51, 46, 46)
                                   .withOpacity(0.5),
                               spreadRadius: 5,
                               blurRadius: 7,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
                             ),
                           ],
                         ),
@@ -135,7 +137,7 @@ class _State extends State<TextFieldExample> {
                                             border: Border.all(),
                                             borderRadius:
                                                 BorderRadius.circular(10),
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 173, 164, 164)),
                                         child: NumberPickerWidget(
                                           maxValue: widget.manifest.maxSol,
@@ -150,10 +152,10 @@ class _State extends State<TextFieldExample> {
                                 padding: const EdgeInsets.all(15),
                                 child: Row(
                                   children: [
-                                    const Expanded(
+                                    Expanded(
                                       child: Text(
-                                        "Camera :",
-                                        style: TextStyle(
+                                        AppLocalizations.of(context)!.camera,
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontFamily: 'ChakraPetch',
                                             fontSize: 20),
@@ -166,7 +168,7 @@ class _State extends State<TextFieldExample> {
                                             border: Border.all(),
                                             borderRadius:
                                                 BorderRadius.circular(10),
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 173, 164, 164)),
                                         child: DropdownButton<RoverCamera?>(
                                             // Initial Value
@@ -184,7 +186,11 @@ class _State extends State<TextFieldExample> {
                                               return DropdownMenuItem(
                                                 value: item,
                                                 alignment: Alignment.center,
-                                                child: Text(item?.name ?? "All",
+                                                child: Text(
+                                                    item?.name ??
+                                                        AppLocalizations.of(
+                                                                context)!
+                                                            .all,
                                                     style: whiteText),
                                               );
                                             }).toList(),
@@ -206,10 +212,11 @@ class _State extends State<TextFieldExample> {
                                   style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all(
-                                              Color.fromARGB(
+                                              const Color.fromARGB(
                                                   155, 230, 115, 70))),
-                                  child: const Text('ENTER',
-                                      style: TextStyle(
+                                  child: Text(
+                                      AppLocalizations.of(context)!.search,
+                                      style: const TextStyle(
                                           color: Color.fromARGB(255, 3, 3, 3))),
                                   onPressed: () {
                                     _loader.fetchNasaRoverPhotos(
@@ -250,9 +257,9 @@ class _State extends State<TextFieldExample> {
                         child: Container(
                             color: Colors.white.withAlpha(200),
                             height: 200,
-                            child: const Center(
-                                child: Text(
-                                    "There is no data for the selected criteria"))),
+                            child: Center(
+                                child: Text(AppLocalizations.of(context)!
+                                    .errorMessage))),
                       );
                     }, childCount: 1),
                   ),

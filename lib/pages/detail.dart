@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,8 +36,8 @@ class DetailsPage extends StatelessWidget {
             bloc: cubit,
             builder: (ctx, state) {
               if (cubit.isFailed) {
-                return const Center(
-                  child: Text("An error was occured"),
+                return Center(
+                  child: Text(AppLocalizations.of(ctx)!.errorMessage),
                 );
               } else if (cubit.isLoading) {
                 return Center(
@@ -62,6 +63,7 @@ class DetailsPage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class _RoverDetail extends StatelessWidget {
   _RoverDetail({Key? key, required this.roverInfo, required this.rover})
       : super(key: key);
@@ -96,7 +98,7 @@ class _RoverDetail extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(top: size.height * 0.45),
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 4, 20, 32),
+                    color: const Color.fromARGB(255, 4, 20, 32),
                     borderRadius: BorderRadius.circular(50)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,15 +144,16 @@ class _RoverDetail extends StatelessWidget {
                           const Divider(color: Colors.black38),
                           const SizedBox(height: 32),
                           DescriptionEntry(
-                              title: "Launching date",
+                              title:
+                                  AppLocalizations.of(context)!.launchingDate,
                               description:
                                   _dateTimeToString(roverInfo.launchDate)),
                           DescriptionEntry(
-                              title: "Landing date",
+                              title: AppLocalizations.of(context)!.landingDate,
                               description:
                                   _dateTimeToString(roverInfo.landingDate)),
                           DescriptionEntry(
-                              title: "Status",
+                              title: AppLocalizations.of(context)!.status,
                               description: roverInfo.status.name),
                         ],
                       ),
@@ -159,7 +162,7 @@ class _RoverDetail extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         MaterialButton(
-                          color: Color.fromARGB(155, 230, 115, 70),
+                          color: const Color.fromARGB(155, 230, 115, 70),
                           onPressed: () {
                             Navigator.of(context).push(
                               // MaterialPageRoute(
@@ -178,9 +181,9 @@ class _RoverDetail extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Row(children: [
-                            const Icon(Icons.newspaper),
-                            const Text(
+                          child: Row(children: const [
+                            Icon(Icons.newspaper),
+                            Text(
                               "Learn more",
                               style: TextStyle(fontFamily: 'ChakraPetch'),
                             )

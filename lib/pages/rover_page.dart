@@ -1,9 +1,4 @@
-import 'dart:ui';
-
-import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_nasa/pages/detail.dart';
 import 'package:flutter_nasa/widgets/blurred_image.dart';
 
@@ -21,17 +16,17 @@ class RoverPage extends StatelessWidget {
     return Scaffold(
       // backgroundColor: Color.fromARGB(255, 131, 125, 125),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('images/stars.jpg'), fit: BoxFit.cover)),
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
               elevation: 15,
-              backgroundColor: Color.fromARGB(255, 19, 17, 17),
+              backgroundColor: const Color.fromARGB(255, 19, 17, 17),
               flexibleSpace: FlexibleSpaceBar(
                   titlePadding: const EdgeInsets.only(left: 25.0, bottom: 30),
-                  title: Text(
+                  title: const Text(
                     "Mars Rovers",
                     style: TextStyle(
                         fontFamily: 'ChakraPetch',
@@ -39,11 +34,11 @@ class RoverPage extends StatelessWidget {
                         color: Colors.white),
                   ),
                   background: ClipRRect(
-                      borderRadius:
-                          BorderRadius.only(bottomRight: Radius.circular(200)),
+                      borderRadius: const BorderRadius.only(
+                          bottomRight: Radius.circular(200)),
                       child: Image.asset("images/mars-nasa.jpg",
                           fit: BoxFit.cover))),
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(200), //200 ,200
               )),
@@ -61,9 +56,10 @@ class RoverPage extends StatelessWidget {
                       return DetailsPage(rover: rover);
                     }));
                   },
+                  // ignore: avoid_unnecessary_containers
                   child: Container(
                     child: Padding(
-                        padding: EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20).copyWith(
                               bottomRight: Radius.zero,
