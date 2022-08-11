@@ -1,4 +1,9 @@
+import 'dart:ui';
+
+import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_nasa/pages/detail.dart';
 import 'package:flutter_nasa/widgets/blurred_image.dart';
 
@@ -57,8 +62,16 @@ class RoverPage extends StatelessWidget {
                     }));
                   },
                   child: Container(
+                    decoration: BoxDecoration(boxShadow: [
+                      BoxShadow(
+                          offset: Offset(0, 100),
+                          spreadRadius: 0.11,
+                          blurRadius: 3000,
+                          blurStyle: BlurStyle.inner,
+                          color: Colors.grey)
+                    ]),
                     child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: EdgeInsets.all(20.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20).copyWith(
                               bottomRight: Radius.zero,
