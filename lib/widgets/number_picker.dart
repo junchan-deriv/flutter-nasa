@@ -110,7 +110,8 @@ class _NumberPickerWidgetState extends State<NumberPickerWidget> {
         child: TextButton(
             style: style,
             onPressed: canDecrease ? _decrease : null,
-            child: const Text("-")),
+            child: const Text("-",
+                style: TextStyle(color: Color.fromARGB(255, 63, 60, 60)))),
       ),
       Expanded(
         flex: 4,
@@ -136,7 +137,8 @@ class _NumberPickerWidgetState extends State<NumberPickerWidget> {
         child: TextButton(
             style: style,
             onPressed: canIncrease ? _increase : null,
-            child: const Text("+")),
+            child: const Text("+",
+                style: TextStyle(color: Color.fromARGB(255, 63, 60, 60)))),
       ),
     ]);
   }

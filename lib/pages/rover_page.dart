@@ -17,19 +17,8 @@ class RoverPage extends StatelessWidget {
       // backgroundColor: Color.fromARGB(255, 131, 125, 125),
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-          colors: [
-            Color.fromARGB(255, 4, 10, 17),
-            Color.fromARGB(255, 12, 18, 27),
-            Color.fromARGB(255, 15, 57, 119),
-            Color.fromARGB(255, 122, 73, 73),
-            Color.fromARGB(255, 16, 28, 44),
-            Color.fromARGB(255, 28, 57, 107),
-            Color.fromARGB(255, 20, 38, 61),
-            Color.fromARGB(255, 16, 28, 44),
-          ],
-          //  begin: Alignment.topRight, end: Alignment.bottomLeft
-        )),
+            image: DecorationImage(
+                image: AssetImage('images/stars.jpg'), fit: BoxFit.cover)),
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
@@ -81,7 +70,7 @@ class RoverPage extends StatelessWidget {
                               fit: BoxFit.fill,
                             ),
                           ),
-                          //blured image is the widget
+                          //BluredImage is the widget
                         )),
                   ),
                 );
