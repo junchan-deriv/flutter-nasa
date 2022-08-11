@@ -4,7 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_nasa/models/nasa_manifest.dart';
 import 'package:flutter_nasa/models/nasa_rover_photos.dart';
-import 'package:flutter_nasa/pages/textfield.dart';
+import 'package:flutter_nasa/pages/discovery.dart';
 import 'package:flutter_nasa/states/loader_base.dart';
 import 'package:flutter_nasa/states/nasa_manifest.dart';
 import 'package:flutter_nasa/states/nasa_photo.dart';
@@ -174,7 +174,7 @@ class _RoverDetail extends StatelessWidget {
                               //   ),
                               //),
                               PageTransition(
-                                child: TextFieldExample(
+                                child: DiscoveryPage(
                                     rover: rover, manifest: roverInfo),
                                 type: PageTransitionType.rightToLeft,
                                 childCurrent: this,

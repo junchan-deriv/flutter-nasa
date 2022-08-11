@@ -8,18 +8,17 @@ import 'package:flutter_nasa/widgets/network_image.dart';
 import 'package:flutter_nasa/widgets/number_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class TextFieldExample extends StatefulWidget {
+class DiscoveryPage extends StatefulWidget {
   final String rover;
   final NasaRoverManifest manifest;
-  const TextFieldExample(
-      {Key? key, required this.rover, required this.manifest})
+  const DiscoveryPage({Key? key, required this.rover, required this.manifest})
       : super(key: key);
 
   @override
-  State<TextFieldExample> createState() => _State();
+  State<DiscoveryPage> createState() => _State();
 }
 
-class _State extends State<TextFieldExample> {
+class _State extends State<DiscoveryPage> {
   int sol = 0;
   RoverCamera? camera;
   late NasaPhotoLoaderCubit _loader;
