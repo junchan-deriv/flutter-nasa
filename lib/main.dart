@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nasa/pages/detail.dart';
 import 'package:flutter_nasa/pages/rover_page.dart';
 
 void main() {
