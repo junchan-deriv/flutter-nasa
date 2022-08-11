@@ -8,6 +8,7 @@ import 'package:flutter_nasa/pages/discovery.dart';
 import 'package:flutter_nasa/states/loader_base.dart';
 import 'package:flutter_nasa/states/nasa_manifest.dart';
 import 'package:flutter_nasa/states/nasa_photo.dart';
+import 'package:flutter_nasa/widgets/master_detail_tablet.dart';
 import 'package:flutter_nasa/widgets/network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
@@ -165,6 +166,12 @@ class _RoverDetail extends StatelessWidget {
                         MaterialButton(
                           color: const Color.fromARGB(155, 230, 115, 70),
                           onPressed: () {
+                            if (pushDetailToTabletView(
+                                context,
+                                ((context) => DiscoveryPage(
+                                    rover: rover, manifest: roverInfo)))) {
+                              return;
+                            }
                             Navigator.of(context).push(
                               // MaterialPageRoute(
 
@@ -263,24 +270,25 @@ class _RoverDetail extends StatelessWidget {
             ],
           ),
         ),
-        Positioned(
-          left: 0,
-          top: 0,
-          child: SizedBox(
-            width: 50,
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: SvgPicture.asset(
-                  "images/back_arrow3.svg",
+        if (!inTabletView(context))
+          Positioned(
+            left: 0,
+            top: 0,
+            child: SizedBox(
+              width: 50,
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: SvgPicture.asset(
+                    "images/back_arrow3.svg",
+                  ),
                 ),
               ),
             ),
           ),
-        ),
       ],
     );
   }

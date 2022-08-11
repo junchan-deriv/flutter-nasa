@@ -4,6 +4,7 @@ import 'package:flutter_nasa/models/nasa_manifest.dart';
 import 'package:flutter_nasa/models/nasa_rover_photos.dart';
 import 'package:flutter_nasa/states/loader_base.dart';
 import 'package:flutter_nasa/states/nasa_photo.dart';
+import 'package:flutter_nasa/widgets/master_detail_tablet.dart';
 import 'package:flutter_nasa/widgets/network_image.dart';
 import 'package:flutter_nasa/widgets/number_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -43,6 +44,11 @@ class _State extends State<DiscoveryPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        leading: inTabletView(context)
+            ? BackButton(
+                onPressed: () => popDetailFromTabletView(context),
+              )
+            : null,
         title: Text(
           AppLocalizations.of(context)!.discoverMore,
           style: const TextStyle(
