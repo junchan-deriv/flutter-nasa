@@ -62,14 +62,6 @@ class RoverPage extends StatelessWidget {
                     }));
                   },
                   child: Container(
-                    decoration: BoxDecoration(boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 100),
-                          spreadRadius: 0.11,
-                          blurRadius: 3000,
-                          blurStyle: BlurStyle.inner,
-                          color: Colors.grey)
-                    ]),
                     child: Padding(
                         padding: EdgeInsets.all(20.0),
                         child: ClipRRect(
@@ -94,82 +86,5 @@ class RoverPage extends StatelessWidget {
         ),
       ),
     );
-    // appBar: AppBar(
-    //   elevation: 15,
-    //   backgroundColor: Colors.black,
-    //   flexibleSpace: ClipRRect(
-    //     borderRadius: BorderRadius.only(
-    //         //200 ,200
-    //         bottomRight: Radius.circular(200)),
-    //     child: Container(
-    //       decoration: BoxDecoration(
-    //         image: DecorationImage(
-    //             image: AssetImage("images/mars-nasa.jpg"),
-    //             fit: BoxFit.fill),
-    //       ),
-    //     ),
-    //   ),
-    //   shape: RoundedRectangleBorder(
-    //       borderRadius: BorderRadius.only(
-    //     bottomRight: Radius.circular(200), //200 ,200
-    //   )),
-    //   bottom: PreferredSize(
-    //     preferredSize: Size.fromHeight(200),
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       mainAxisAlignment: MainAxisAlignment.start,
-    //       children: [
-    //         Padding(
-    //           padding: const EdgeInsets.only(left: 46.0),
-    //           child: Row(
-    //             children: [
-    //               Text(
-    //                 "The Mars",
-    //                 style: TextStyle(
-    //                     fontFamily: 'ChakraPetch',
-    //                     fontSize: 60,
-    //                     color: Colors.white),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //         Padding(
-    //           padding: const EdgeInsets.only(left: 48.0),
-    //           child: Text(
-    //             "Rovers",
-    //             style: TextStyle(
-    //                 fontFamily: 'ChakraPetch',
-    //                 fontSize: 50,
-    //                 color: Colors.white),
-    //           ),
-    //         ),
-    //         SizedBox(
-    //           height: 60,
-    //         )
-    //       ],
-    //     ),
-    //   ),
-    // ),
-    // body: Center(
-    //     child: ListView.builder(
-    //         itemCount: rovers.length,
-    //         itemBuilder: ((context, index) {
-    //           final String rover = rovers[index].toLowerCase();
-    //           return GestureDetector(
-    //               onTap: () {
-    //                 Navigator.of(context)
-    //                     .push(MaterialPageRoute(builder: (context) {
-    //                   return DetailsPage(rover: rover);
-    //                 }));
-    //               },
-    //               child: Container(
-    //                 child: Image.asset(
-    //                   'images/$rover.jpg',
-    //                   height: 250,
-    //                   fit: BoxFit.fill,
-    //                 ),
-    //               ));
-    //         })))
-    // );
   }
 }

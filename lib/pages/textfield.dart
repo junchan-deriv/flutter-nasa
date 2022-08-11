@@ -58,7 +58,7 @@ class _State extends State<TextFieldExample> {
         // foregroundColor: Colors.pink,
         backgroundColor: Color.fromARGB(255, 36, 24, 24),
         elevation: 22,
-        // shadowColor: Color.fromARGB(255, 5, 5, 5),
+        shadowColor: Color.fromARGB(255, 49, 49, 49),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(bottomRight: Radius.circular(40))),
       ),
@@ -98,7 +98,21 @@ class _State extends State<TextFieldExample> {
                     padding: const EdgeInsets.all(15),
                     child: Column(mainAxisSize: MainAxisSize.min, children: [
                       Container(
-                        color: Color.fromARGB(255, 62, 63, 100).withAlpha(180),
+                        decoration: BoxDecoration(
+                          color:
+                              Color.fromARGB(255, 62, 63, 100).withAlpha(180),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 51, 46, 46)
+                                  .withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
                         child: Wrap(
                           children: <Widget>[
                             Padding(
@@ -193,9 +207,10 @@ class _State extends State<TextFieldExample> {
                                       backgroundColor:
                                           MaterialStateProperty.all(
                                               Color.fromARGB(
-                                                  255, 25, 140, 235))),
+                                                  155, 230, 115, 70))),
                                   child: const Text('ENTER',
-                                      style: TextStyle(color: Colors.white)),
+                                      style: TextStyle(
+                                          color: Color.fromARGB(255, 3, 3, 3))),
                                   onPressed: () {
                                     _loader.fetchNasaRoverPhotos(
                                         widget.rover, sol);
