@@ -45,15 +45,29 @@ class _State extends State<TextFieldExample> {
         .apply(bodyColor: Colors.black)
         .bodyMedium!;
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Flutter TextField Example'),
+        title: const Text(
+          'Discover More',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+            fontFamily: 'ChakraPetch',
+          ),
+        ),
+        // foregroundColor: Colors.pink,
+        backgroundColor: Color.fromARGB(255, 36, 24, 24),
+        elevation: 22,
+        shadowColor: Color.fromARGB(255, 49, 49, 49),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(bottomRight: Radius.circular(40))),
       ),
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.fitHeight,
             image: AssetImage(
-              "images/space.gif",
+              "images/stars.jpg",
             ),
           ),
         ),
@@ -84,7 +98,21 @@ class _State extends State<TextFieldExample> {
                     padding: const EdgeInsets.all(15),
                     child: Column(mainAxisSize: MainAxisSize.min, children: [
                       Container(
-                        color: Colors.white.withAlpha(180),
+                        decoration: BoxDecoration(
+                          color:
+                              Color.fromARGB(255, 62, 63, 100).withAlpha(180),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 51, 46, 46)
+                                  .withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
                         child: Wrap(
                           children: <Widget>[
                             Padding(
@@ -92,16 +120,23 @@ class _State extends State<TextFieldExample> {
                                 child: Row(
                                   children: [
                                     const Expanded(
-                                      child: Text("Sol:"),
+                                      child: Text(
+                                        "Sol:",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'ChakraPetch',
+                                            fontSize: 25),
+                                      ),
                                     ),
                                     Expanded(
-                                      flex: 5,
+                                      flex: 2,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          border: Border.all(),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
+                                            border: Border.all(),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Color.fromARGB(
+                                                255, 173, 164, 164)),
                                         child: NumberPickerWidget(
                                           maxValue: widget.manifest.maxSol,
                                           value: sol,
@@ -116,16 +151,23 @@ class _State extends State<TextFieldExample> {
                                 child: Row(
                                   children: [
                                     const Expanded(
-                                      child: Text("Camera:"),
+                                      child: Text(
+                                        "Camera :",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'ChakraPetch',
+                                            fontSize: 20),
+                                      ),
                                     ),
                                     Expanded(
-                                      flex: 5,
+                                      flex: 2,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          border: Border.all(),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
+                                            border: Border.all(),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Color.fromARGB(
+                                                255, 173, 164, 164)),
                                         child: DropdownButton<RoverCamera?>(
                                             // Initial Value
                                             value: camera,
@@ -164,9 +206,11 @@ class _State extends State<TextFieldExample> {
                                   style: ButtonStyle(
                                       backgroundColor:
                                           MaterialStateProperty.all(
-                                              Colors.blue)),
+                                              Color.fromARGB(
+                                                  155, 230, 115, 70))),
                                   child: const Text('ENTER',
-                                      style: TextStyle(color: Colors.white)),
+                                      style: TextStyle(
+                                          color: Color.fromARGB(255, 3, 3, 3))),
                                   onPressed: () {
                                     _loader.fetchNasaRoverPhotos(
                                         widget.rover, sol);
