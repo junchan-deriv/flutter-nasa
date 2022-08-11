@@ -8,6 +8,7 @@ import 'package:flutter_nasa/pages/textfield.dart';
 import 'package:flutter_nasa/states/loader_base.dart';
 import 'package:flutter_nasa/states/nasa_manifest.dart';
 import 'package:flutter_nasa/states/nasa_photo.dart';
+import 'package:flutter_nasa/widgets/network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
@@ -181,11 +182,13 @@ class _RoverDetail extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Row(children: const [
-                            Icon(Icons.newspaper),
+                          child: Row(children: [
+                            const Icon(Icons.newspaper, color: Colors.white),
                             Text(
-                              "Learn more",
-                              style: TextStyle(fontFamily: 'ChakraPetch'),
+                              AppLocalizations.of(context)!.learnMore,
+                              style: const TextStyle(
+                                  fontFamily: 'ChakraPetch',
+                                  color: Colors.white),
                             )
                           ]),
                         ),
@@ -214,10 +217,11 @@ class _RoverDetail extends StatelessWidget {
                               return const Center(
                                   child: CircularProgressIndicator());
                             } else if (_loader.isFailed) {
-                              return const Center(
+                              return Center(
                                 child: Text(
-                                  "Something went wrong",
-                                  style: TextStyle(color: _primaryTextColor),
+                                  AppLocalizations.of(context)!.errorMessage,
+                                  style:
+                                      const TextStyle(color: _primaryTextColor),
                                 ),
                               );
                             }
@@ -242,8 +246,8 @@ class _RoverDetail extends StatelessWidget {
                                       ),
                                       child: AspectRatio(
                                           aspectRatio: 1,
-                                          child: Image.network(
-                                            result
+                                          child: NetworkImageWidget(
+                                            url: result
                                                 .photos[baseIndex + index].image
                                                 .toString(),
                                             fit: BoxFit.cover,

@@ -255,11 +255,12 @@ class _State extends State<TextFieldExample> {
                       return Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Container(
-                            color: Colors.white.withAlpha(200),
-                            height: 200,
-                            child: Center(
-                                child: Text(AppLocalizations.of(context)!
-                                    .errorMessage))),
+                          color: Colors.white.withAlpha(200),
+                          height: 200,
+                          child: Center(
+                            child: Text(AppLocalizations.of(context)!.noData),
+                          ),
+                        ),
                       );
                     }, childCount: 1),
                   ),
