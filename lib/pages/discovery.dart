@@ -40,10 +40,6 @@ class _State extends State<DiscoveryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle whiteText = Theme.of(context)
-        .primaryTextTheme
-        .apply(bodyColor: Colors.black)
-        .bodyMedium!;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -74,7 +70,7 @@ class _State extends State<DiscoveryPage> {
         child: BlocConsumer<NasaPhotoLoaderCubit, LoaderState<NasaRoverPhotos>>(
             bloc: _loader,
             listener: (context, state) {
-              if (!_loader.isFailed) {
+              if (state is! LoaderError) {
                 return;
               }
               print((state as LoaderError).error.toString());
@@ -93,143 +89,8 @@ class _State extends State<DiscoveryPage> {
 
               return CustomScrollView(controller: _scrollController, slivers: [
                 SliverList(
-                    delegate: SliverChildBuilderDelegate((_, __) {
-                  return Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Column(mainAxisSize: MainAxisSize.min, children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 62, 63, 100)
-                              .withAlpha(180),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color.fromARGB(255, 51, 46, 46)
-                                  .withOpacity(0.5),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Wrap(
-                          children: <Widget>[
-                            Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Row(
-                                  children: [
-                                    const Expanded(
-                                      child: Text(
-                                        "Sol:",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'ChakraPetch',
-                                            fontSize: 25),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: const Color.fromARGB(
-                                                255, 173, 164, 164)),
-                                        child: NumberPickerWidget(
-                                          maxValue: widget.manifest.maxSol,
-                                          value: sol,
-                                          onUpdated: (val) => sol = val,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                            Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        AppLocalizations.of(context)!.camera,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'ChakraPetch',
-                                            fontSize: 20),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: const Color.fromARGB(
-                                                255, 173, 164, 164)),
-                                        child: DropdownButton<RoverCamera?>(
-                                            // Initial Value
-                                            value: camera,
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            isExpanded: true,
-                                            // Down Arrow Icon
-                                            icon: const Icon(
-                                                Icons.keyboard_arrow_down),
-
-                                            // Array list of items
-                                            items: [null, ...RoverCamera.values]
-                                                .map((RoverCamera? item) {
-                                              return DropdownMenuItem(
-                                                value: item,
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                    item?.name ??
-                                                        AppLocalizations.of(
-                                                                context)!
-                                                            .all,
-                                                    style: whiteText),
-                                              );
-                                            }).toList(),
-                                            // After selecting the desired option,it will
-                                            // change button value to selected value
-                                            onChanged: (RoverCamera? newValue) {
-                                              setState(() {
-                                                camera = newValue;
-                                              });
-                                            }),
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              const Color.fromARGB(
-                                                  155, 230, 115, 70))),
-                                  child: Text(
-                                      AppLocalizations.of(context)!.search,
-                                      style: const TextStyle(
-                                          color: Color.fromARGB(255, 3, 3, 3))),
-                                  onPressed: () {
-                                    _loader.fetchNasaRoverPhotos(
-                                        widget.rover, sol);
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
-                  );
-                }, childCount: 1)),
+                  delegate: _Form(this, loader: _loader),
+                ),
                 if (photosData != null && photosData.photos.isNotEmpty)
                   SliverGrid(
                     delegate: SliverChildBuilderDelegate((ctx, index) {
@@ -282,4 +143,142 @@ class _State extends State<DiscoveryPage> {
       ),
     );
   }
+}
+
+class _Form extends SliverChildBuilderDelegate {
+  _State pageState;
+  _Form(this.pageState, {required NasaPhotoLoaderCubit loader})
+      : super((context, _) {
+          final TextStyle blackText = Theme.of(context)
+              .primaryTextTheme
+              .apply(bodyColor: Colors.black)
+              .bodyMedium!;
+          return Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 62, 63, 100).withAlpha(180),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromARGB(255, 51, 46, 46)
+                          .withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Wrap(
+                  children: <Widget>[
+                    Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Row(
+                          children: [
+                            const Expanded(
+                              child: Text(
+                                "Sol:",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'ChakraPetch',
+                                    fontSize: 25),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: const Color.fromARGB(
+                                        255, 173, 164, 164)),
+                                child: NumberPickerWidget(
+                                  maxValue: pageState.widget.manifest.maxSol,
+                                  value: pageState.sol,
+                                  onUpdated: (val) => pageState.sol = val,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                AppLocalizations.of(context)!.camera,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'ChakraPetch',
+                                    fontSize: 20),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: const Color.fromARGB(
+                                        255, 173, 164, 164)),
+                                child: DropdownButton<RoverCamera?>(
+                                    // Initial Value
+                                    value: pageState.camera,
+                                    borderRadius: BorderRadius.circular(10),
+                                    isExpanded: true,
+                                    // Down Arrow Icon
+                                    icon: const Icon(Icons.keyboard_arrow_down),
+
+                                    // Array list of items
+                                    items: [null, ...RoverCamera.values]
+                                        .map((RoverCamera? item) {
+                                      return DropdownMenuItem(
+                                        value: item,
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                            item?.name ??
+                                                AppLocalizations.of(context)!
+                                                    .all,
+                                            style: blackText),
+                                      );
+                                    }).toList(),
+                                    // After selecting the desired option,it will
+                                    // change button value to selected value
+                                    onChanged: (RoverCamera? newValue) {
+                                      //this is valid because the form is technically a part of the page
+                                      // ignore: invalid_use_of_protected_member
+                                      pageState.setState(() {
+                                        pageState.camera = newValue;
+                                      });
+                                    }),
+                              ),
+                            ),
+                          ],
+                        )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                  const Color.fromARGB(155, 230, 115, 70))),
+                          child: Text(AppLocalizations.of(context)!.search,
+                              style: const TextStyle(
+                                  color: Color.fromARGB(255, 3, 3, 3))),
+                          onPressed: () {
+                            loader.fetchNasaRoverPhotos(
+                                pageState.widget.rover, pageState.sol,
+                                camera: pageState.camera);
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ]),
+          );
+        }, childCount: 1);
 }
