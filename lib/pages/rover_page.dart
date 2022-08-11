@@ -19,38 +19,53 @@ class RoverPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 131, 125, 125),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            elevation: 15,
-            backgroundColor: Color.fromARGB(255, 19, 17, 17),
-            flexibleSpace: FlexibleSpaceBar(
-                titlePadding: const EdgeInsets.only(left: 25.0, bottom: 30),
-                title: Text(
-                  "Mars Rovers",
-                  style: TextStyle(
-                      fontFamily: 'ChakraPetch',
-                      fontSize: 30,
-                      color: Colors.white),
-                ),
-                background: ClipRRect(
-                    borderRadius:
-                        BorderRadius.only(bottomRight: Radius.circular(200)),
-                    child: Image.asset("images/mars-nasa.jpg",
-                        fit: BoxFit.cover))),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(200), //200 ,200
-            )),
-            pinned: true,
-            expandedHeight: MediaQuery.of(context).size.height * 0.250,
-          ),
-          SliverList(
-              delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              final String rover = rovers[index].toLowerCase();
-              return GestureDetector(
+      // backgroundColor: Color.fromARGB(255, 131, 125, 125),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 4, 10, 17),
+            Color.fromARGB(255, 12, 18, 27),
+            Color.fromARGB(255, 15, 57, 119),
+            Color.fromARGB(255, 122, 73, 73),
+            Color.fromARGB(255, 16, 28, 44),
+            Color.fromARGB(255, 28, 57, 107),
+            Color.fromARGB(255, 20, 38, 61),
+            Color.fromARGB(255, 16, 28, 44),
+          ],
+          //  begin: Alignment.topRight, end: Alignment.bottomLeft
+        )),
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              elevation: 15,
+              backgroundColor: Color.fromARGB(255, 19, 17, 17),
+              flexibleSpace: FlexibleSpaceBar(
+                  titlePadding: const EdgeInsets.only(left: 25.0, bottom: 30),
+                  title: Text(
+                    "Mars Rovers",
+                    style: TextStyle(
+                        fontFamily: 'ChakraPetch',
+                        fontSize: 30,
+                        color: Colors.white),
+                  ),
+                  background: ClipRRect(
+                      borderRadius:
+                          BorderRadius.only(bottomRight: Radius.circular(200)),
+                      child: Image.asset("images/mars-nasa.jpg",
+                          fit: BoxFit.cover))),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(200), //200 ,200
+              )),
+              pinned: true,
+              expandedHeight: MediaQuery.of(context).size.height * 0.250,
+            ),
+            SliverList(
+                delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final String rover = rovers[index].toLowerCase();
+                return GestureDetector(
                   onTap: () {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
@@ -58,14 +73,6 @@ class RoverPage extends StatelessWidget {
                     }));
                   },
                   child: Container(
-                    decoration: BoxDecoration(boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 100),
-                          spreadRadius: 0.11,
-                          blurRadius: 3000,
-                          blurStyle: BlurStyle.inner,
-                          color: Colors.grey)
-                    ]),
                     child: Padding(
                         padding: EdgeInsets.all(20.0),
                         child: ClipRRect(
@@ -79,12 +86,15 @@ class RoverPage extends StatelessWidget {
                               fit: BoxFit.fill,
                             ),
                           ),
+                          //blured image is the widget
                         )),
-                  ));
-            },
-            childCount: rovers.length,
-          )),
-        ],
+                  ),
+                );
+              },
+              childCount: rovers.length,
+            )),
+          ],
+        ),
       ),
       // appBar: AppBar(
       //   elevation: 15,
