@@ -17,6 +17,16 @@ Developers:
   - there is an increment and decrement function at the Sol button to increase or decrease the value
   - the property is made seperately at the widget section as number_picker.dart
 
+# Screenshots
+
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_1.png?raw=true" height:"200"/>
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_1.2.png?raw=true" height:"200"/>
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_2.png?raw=true" height:"200"/>
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_2.5.png?raw=true" height:"200"/>
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_3.png?raw=true" height:"200"/>
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/tablet-main.png?raw=true" height:"200"/>
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/tablet-discover.png?raw=true" height:"200"/>
+
 # Tablet View Internals
 
 ## Trigger
