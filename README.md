@@ -19,13 +19,13 @@ Developers:
 
 # Screenshots
 
-<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_1.png?raw=true" height="200">
-<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_1.2.png?raw=true" height="200">
-<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_2.png?raw=true" height="200">
-<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_2.5.png?raw=true" height="200">
-<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_3.png?raw=true" height="200">
-<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/tablet-main.png?raw=true" height="200">
-<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/tablet-discover.png?raw=true" height="200">
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_1.png?raw=true" height="400">
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_1.2.png?raw=true" height="400">
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_2.png?raw=true" height="400">
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_2.5.png?raw=true" height="400">
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/screen_3.png?raw=true" height="400">
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/tablet-main.png?raw=true" height="400">
+<img src="https://github.com/junchan-deriv/flutter-nasa/blob/master/screenshots/tablet-discover.png?raw=true" height="400">
 
 # Tablet View Internals
 
