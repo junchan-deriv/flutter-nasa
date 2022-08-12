@@ -2,7 +2,7 @@
     package="com.example.flutter_nasa">
 <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="flutter_nasa"
+        android:label="Flutter Nasa Besquare"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

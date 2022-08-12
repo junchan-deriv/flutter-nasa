@@ -5,7 +5,7 @@ class MasterDetailRenderer extends StatefulWidget {
   //
   // Default details page
   //
-  final Widget detail;
+  final DetailPageBuilder detail;
   const MasterDetailRenderer(
       {Key? key, required this.master, required this.detail})
       : super(key: key);
@@ -21,7 +21,7 @@ class _MasterDetailRendererState extends State<MasterDetailRenderer> {
   @override
   void initState() {
     super.initState();
-    details.add(widget.detail);
+    details.add(widget.detail(context));
   }
 
   @override

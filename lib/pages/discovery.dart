@@ -272,7 +272,7 @@ class _Form extends SliverChildBuilderDelegate {
                                   const Color.fromARGB(155, 230, 115, 70))),
                           child: Text(AppLocalizations.of(context)!.search,
                               style: const TextStyle(
-                                  color: Color.fromARGB(255, 3, 3, 3))),
+                                  color: Color.fromARGB(255, 233, 227, 227))),
                           onPressed: () {
                             loader.fetchNasaRoverPhotos(
                                 pageState.widget.rover, pageState.sol,

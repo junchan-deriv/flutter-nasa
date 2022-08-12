@@ -19,13 +19,13 @@ class RoverPage extends StatelessWidget {
       // backgroundColor: Color.fromARGB(255, 131, 125, 125),
       body: mobile
           ? const RoverPageBody(rovers: rovers)
-          : const MasterDetailRenderer(
-              master: RoverPageBody(
+          : MasterDetailRenderer(
+              master: const RoverPageBody(
                 rovers: rovers,
               ),
-              detail: DetailsPage(
-                rover: "curiosity",
-              )),
+              detail: (_) => const DetailsPage(
+                    rover: "curiosity",
+                  )),
     );
   }
 }
