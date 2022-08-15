@@ -45,6 +45,7 @@ class RoverPageBody extends StatelessWidget {
           image: DecorationImage(
               image: AssetImage('images/stars.jpg'), fit: BoxFit.cover)),
       child: CustomScrollView(
+        primary: !inTabletView(context),
         slivers: [
           SliverAppBar(
             elevation: 15,
