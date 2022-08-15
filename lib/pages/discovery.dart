@@ -40,6 +40,12 @@ class _State extends State<DiscoveryPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
